@@ -1,31 +1,33 @@
 # AutoSim Android
 
-AutoSim Android is an Android automation workspace for building, previewing, and running repeatable on-device interaction flows. It combines saved tap targets, draggable overlays, sequence execution, screen capture, OCR regions, phrase matching, and execution logs into a single Jetpack Compose application.
+AutoSim Android is an Android app for making simple phone automation flows.
 
-The project is designed for controlled automation scenarios where a user needs to define screen coordinates, group actions into reusable sequences, and optionally trigger actions from recognized text on the screen.
+In easy words, this app lets a user save places on the screen, then run those taps again later. It can also read text from selected screen areas using OCR. If the app finds a matching word or phrase, it can run a saved action.
 
-## Features
+This project is useful for learning how Android automation, accessibility services, screen capture, OCR, and local app storage can work together.
 
-- **Click spot management**: create, edit, and store named tap targets with repeat and delay settings.
-- **Overlay tooling**: display floating overlay controls for execution and preview workflows.
-- **Sequence builder**: compose ordered automation steps such as clicks, waits, and OCR scans.
-- **Accessibility execution**: perform taps through an Android accessibility service.
-- **Screen capture support**: request MediaProjection permission for OCR-enabled workflows.
-- **OCR regions**: define rectangular regions and scan only the selected area.
-- **Phrase-triggered actions**: match recognized text against configured phrases and run mapped click actions.
-- **Run controls**: start, pause, resume, and stop sequence execution.
-- **Logs and history**: persist run events, errors, successful actions, and OCR text history with Room.
-- **Import/export utilities**: supporting utilities for moving saved automation data between environments.
+## What This App Can Do
 
-## How It Works
+- Save tap positions on the screen.
+- Group taps, waits, and OCR checks into a sequence.
+- Run saved sequences from the app.
+- Use a floating overlay while automation is running.
+- Read text from selected parts of the screen.
+- Run an action when a selected word or phrase is found.
+- Save logs, OCR history, and automation data locally.
+- Import or export saved automation data.
 
-AutoSim stores automation data locally with Room. Users define click spots and OCR regions from the app UI, then combine them into sequences. When a sequence runs, `SequenceRunner` loads the ordered steps from the database and executes them through the accessibility service.
+## How It Works In Simple Words
 
-For OCR steps, the app uses Android screen capture through `MediaProjection`, crops the latest screen bitmap to the configured region, and passes it through Google ML Kit Text Recognition. Recognized text can be checked against phrase groups, and matching phrases can trigger stored click spots.
+The app stores the user's saved tap points, OCR regions, and sequences in a local Room database.
 
-## Permissions
+When a sequence starts, the app reads the saved steps and runs them one by one. Tap actions are performed through Android's accessibility service.
 
-AutoSim uses several sensitive Android capabilities because it automates device interactions:
+For OCR steps, the app takes a screen capture, cuts out the selected area, and sends that image to Google ML Kit Text Recognition. The returned text is then checked against saved phrases.
+
+## Permissions Used
+
+The app needs some Android permissions because it interacts with the screen:
 
 - **Accessibility Service**: required to perform tap gestures.
 - **Display Over Other Apps**: required for floating overlay controls.
@@ -33,7 +35,7 @@ AutoSim uses several sensitive Android capabilities because it automates device 
 - **Foreground Service**: keeps overlay and capture services active while automation is running.
 - **Internet**: available for dependencies or future network-enabled workflows.
 
-Only enable these permissions if you understand the automation being configured. The app is intended for user-controlled automation, testing, and productivity workflows.
+Only enable these permissions when you understand what the automation will do. This project is meant for user-controlled testing, learning, and productivity workflows.
 
 ## Tech Stack
 
@@ -102,7 +104,9 @@ If you add Gradle wrapper scripts later, the equivalent command will be:
 
 ## Current Status
 
-This is an early Android automation project. Core click execution, OCR region scanning, phrase matching, local persistence, and logging are present. Some advanced sequence step types are represented in the model but are still planned for deeper behavior:
+This is an early Android automation project. The main ideas are already present, including tap automation, OCR scanning, phrase matching, local saving, and logs.
+
+Some advanced features are planned or still need more work:
 
 - Text detection sequence steps
 - Repeat block steps
@@ -116,4 +120,3 @@ Automation apps can interact with other apps on the user's behalf. Review every 
 ## License
 
 No license has been selected yet. Add a license before distributing or accepting external contributions.
-
