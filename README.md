@@ -1,122 +1,75 @@
 # AutoSim Android
 
-AutoSim Android is an Android app for making simple phone automation flows.
+![AutoSim Android preview](docs/screenshots/preview.svg)
 
-In easy words, this app lets a user save places on the screen, then run those taps again later. It can also read text from selected screen areas using OCR. If the app finds a matching word or phrase, it can run a saved action.
+## Short Description
 
-This project is useful for learning how Android automation, accessibility services, screen capture, OCR, and local app storage can work together.
+Save tap points, read screen text, and run simple phone automation flows.
 
-## What This App Can Do
+## About This Project
 
-- Save tap positions on the screen.
-- Group taps, waits, and OCR checks into a sequence.
-- Run saved sequences from the app.
-- Use a floating overlay while automation is running.
-- Read text from selected parts of the screen.
-- Run an action when a selected word or phrase is found.
-- Save logs, OCR history, and automation data locally.
-- Import or export saved automation data.
+AutoSim Android is an Android automation project. It helps a user save screen positions, build repeatable actions, scan selected screen areas with OCR, and run actions when matching text is found.
 
-## How It Works In Simple Words
+The goal is to keep the project easy to understand, easy to run, and useful for learning or further development.
 
-The app stores the user's saved tap points, OCR regions, and sequences in a local Room database.
+## Main Features
 
-When a sequence starts, the app reads the saved steps and runs them one by one. Tap actions are performed through Android's accessibility service.
-
-For OCR steps, the app takes a screen capture, cuts out the selected area, and sends that image to Google ML Kit Text Recognition. The returned text is then checked against saved phrases.
-
-## Permissions Used
-
-The app needs some Android permissions because it interacts with the screen:
-
-- **Accessibility Service**: required to perform tap gestures.
-- **Display Over Other Apps**: required for floating overlay controls.
-- **Media Projection / Screen Capture**: required for OCR region scanning.
-- **Foreground Service**: keeps overlay and capture services active while automation is running.
-- **Internet**: available for dependencies or future network-enabled workflows.
-
-Only enable these permissions when you understand what the automation will do. This project is meant for user-controlled testing, learning, and productivity workflows.
+- Save tap positions and automation steps
+- Create OCR regions for screen text checks
+- Run tap, wait, and scan sequences
+- Use floating overlay controls while testing
+- Store automation data locally with Room
+- Import/export saved automation data
 
 ## Tech Stack
 
 - Kotlin
-- Android Gradle Plugin
 - Jetpack Compose
-- Material 3
-- Navigation Compose
 - Room
-- Kotlin Coroutines and Flow
-- Google ML Kit Text Recognition
-- Moshi
-- Android Accessibility APIs
-- Android MediaProjection APIs
+- ML Kit OCR
+- Accessibility Service
+
+## Project Location
+
+Main local folder:
+
+```text
+D:\PROJECTS\AutoSimAndroid
+```
+
+GitHub repository:
+
+https://github.com/saifalian/AutoSimAndroid
 
 ## Project Structure
 
 ```text
-app/src/main/java/com/example/autosim
-├── accessibility/       # Accessibility service used for gesture execution
-├── db/                  # Room entities, DAOs, and database setup
-├── engine/              # Sequence runner, screen capture, and OCR processing
-├── overlay/             # Floating overlay and coordinate utilities
-├── ui/                  # Compose theme, tabs, and dialogs
-├── utils/               # Utility helpers such as import/export and density conversion
-├── Broadcast.kt
-└── MainActivity.kt
+app/src/main/          Android app source
+app/src/main/java/     Kotlin source files
+gradle/                Gradle wrapper files
+README.md              Project documentation
 ```
 
-There are also legacy package paths under `com.autosim` for overlay and click helper components.
+## How To Run
 
-## Requirements
+1. Open the project in Android Studio.
+2. Let Gradle sync finish.
+3. Build with gradle assembleDebug, or use Android Studio Run.
+4. Install on an Android device or emulator.
+5. Enable Accessibility, overlay, and screen capture permissions only when needed.
 
-- Android Studio
-- JDK 17 or compatible Android Studio bundled JDK
-- Android SDK with API 36 installed
-- Gradle 8.13 compatible environment
-- Android device or emulator running Android 7.0+ (`minSdk 24`)
+## Screenshot
 
-## Build
-
-Open the project in Android Studio and allow Gradle sync to complete.
-
-From a terminal with Gradle available:
-
-```powershell
-gradle assembleDebug
-```
-
-If you add Gradle wrapper scripts later, the equivalent command will be:
-
-```powershell
-.\gradlew.bat assembleDebug
-```
-
-## Basic Usage
-
-1. Install and open the app.
-2. Enable the AutoSim accessibility service when prompted.
-3. Grant overlay permission from the settings or overlay controls flow.
-4. Request screen capture permission if OCR workflows are needed.
-5. Create click spots for important screen coordinates.
-6. Create OCR regions if text-triggered actions are needed.
-7. Build a sequence from clicks, waits, and OCR scan steps.
-8. Start the overlay or run the sequence, then monitor logs from the Logs tab.
+The image above is a clean project preview for GitHub. It shows the main idea of the project in a simple way.
 
 ## Current Status
 
-This is an early Android automation project. The main ideas are already present, including tap automation, OCR scanning, phrase matching, local saving, and logs.
+This project is uploaded to GitHub and prepared as a portfolio-style repository. More improvements can be added later, such as real app screenshots, demo videos, releases, and issue templates.
 
-Some advanced features are planned or still need more work:
+## Safety Note
 
-- Text detection sequence steps
-- Repeat block steps
-- Conditional branching steps
-- Production migration strategy for Room schema changes
-
-## Safety Notes
-
-Automation apps can interact with other apps on the user's behalf. Review every configured click spot and sequence before running it, especially on screens involving payments, account settings, irreversible actions, or private data.
+Use this only for user-controlled automation. Check every click point before running it on important apps.
 
 ## License
 
-No license has been selected yet. Add a license before distributing or accepting external contributions.
+No license file is included yet. Add a license before using this project as an open-source project.
