@@ -12,6 +12,24 @@ AutoSim Android is an Android automation project. It helps a user save screen po
 
 The goal is to keep the project easy to understand, easy to run, and useful for learning or further development.
 
+## Purpose And Idea
+
+**Purpose:** The purpose of this project is to make phone automation easier to understand. It explores how an Android app can save tap points, scan screen text with OCR, and run small workflows controlled by the user.
+
+**Idea:** The idea came from the need to repeat the same phone actions many times. Instead of tapping manually again and again, the app stores positions and steps so they can be tested as a sequence.
+
+**Why I made it:** I made this to learn Android accessibility, overlays, OCR, Room database storage, and automation flow design in one project.
+
+## Screenshots
+
+### Project preview
+
+![Project preview](docs/screenshots/preview.svg)
+
+### Real source structure
+
+![Real source structure](docs/screenshots/source-structure.svg)
+
 ## Main Features
 
 - Save tap positions and automation steps
@@ -57,14 +75,6 @@ README.md              Project documentation
 3. Build with gradle assembleDebug, or use Android Studio Run.
 4. Install on an Android device or emulator.
 5. Enable Accessibility, overlay, and screen capture permissions only when needed.
-
-## Screenshot
-
-The image above is a clean project preview for GitHub. It shows the main idea of the project in a simple way.
-
-## Build Check
-
-Build note: this repository does not currently include a Gradle wrapper script. Open it in Android Studio, or install/use a compatible Gradle version from your Android Studio setup.
 
 ## Current Status
 
