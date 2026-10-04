@@ -121,24 +121,28 @@ class ScreenCaptureService : Service() {
         handler = Handler(handlerThread!!.looper)
         
         imageReader?.setOnImageAvailableListener({ reader ->
-            serviceScope.launch {
-                reader.acquireLatestImage()?.let { image ->
-        val captureRunnable = object : Runnable {
-            override fun run() {
-                if (isCapturing && handler != null) {
-                    // Trigger capture by reading latest image
-                    imageReader?.acquireLatestImage()?.let { image ->
-                        serviceScope.launch {
-                            captureImage(image)
-                        }
-                    }
-                    handler?.postDelayed(this, captureInterval)
-                }
+            val image = reader.acquireLatestImage() ?: return@setOnImageAvailableListener
+            if (!isCapturing) {
+                image.close()
+                return@setOnImageAvailableListener
             }
-        }
-        handler?.postDelayed(captureRunnable, captureInterval)
+            serviceScope.launch {
+                captureImage(image)
+            }
+        }, handler)
+
+        virtualDisplay = mediaProjection?.createVirtualDisplay(
+            "AutoSimScreenCapture",
+            width,
+            height,
+            density,
+            DisplayManager.VIRTUAL_DISPLAY_FLAG_AUTO_MIRROR,
+            imageReader?.surface,
+            null,
+            handler
+        )
     }
-    
+
     private suspend fun captureImage(image: Image) {
         try {
             val planes = image.planes
