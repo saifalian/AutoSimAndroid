@@ -22,6 +22,10 @@ The goal is to keep the project easy to understand, easy to run, and useful for 
 
 ## Screenshots
 
+### Real Android emulator screenshot
+
+![Real Android emulator screenshot](docs/screenshots/real-app.png)
+
 ### Project preview
 
 ![Project preview](docs/screenshots/preview.svg)
@@ -75,6 +79,10 @@ README.md              Project documentation
 3. Build with gradle assembleDebug, or use Android Studio Run.
 4. Install on an Android device or emulator.
 5. Enable Accessibility, overlay, and screen capture permissions only when needed.
+
+## Build Check
+
+Build check: Gradle wrapper files were restored, a broken Kotlin screen-capture service block was fixed, assembleDebug completed successfully, and the app was installed and opened on an Android emulator for the real screenshot.
 
 ## Current Status
 
